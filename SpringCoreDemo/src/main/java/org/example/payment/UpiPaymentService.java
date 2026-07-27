@@ -10,5 +10,6 @@ public class UpiPaymentService implements PaymentService{
     @Override
     public void pay(){
         System.out.println("UPI payment Done");
+
     }
 }
