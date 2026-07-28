@@ -8,13 +8,14 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("org.example")
 public class AppConfig {
 
+//    This will generate 2 bean of same class
     @Bean
-    User createUser(){
-        return new User("Abhishek", 20);
+    public OrderService getOrder(){
+        return new OrderService();
     }
 
     @Bean
-    CartService creatCartService(){
-        return  new CartService();
+    public OrderService getOrder2(){
+        return new OrderService();
     }
 }
