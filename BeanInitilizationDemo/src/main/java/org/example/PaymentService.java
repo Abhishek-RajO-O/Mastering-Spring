@@ -7,7 +7,19 @@ import org.springframework.stereotype.Component;
 @Lazy
 public class PaymentService {
 
-    public PaymentService() {
+    OrderService orderService;
+
+    public PaymentService(OrderService orderService) {
+        this.orderService = orderService;
         System.out.println("Payment Service Created");
+
+    }
+
+//    public PaymentService() {
+//        System.out.println("Payment Service Created");
+//    }
+
+    public void pay() {
+        System.out.println("Payment Done");
     }
 }
