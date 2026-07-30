@@ -1,6 +1,7 @@
 package org.example;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CartService implements DisposableBean /* implements InitializingBean */ {
+public class CartService
+//        implements DisposableBean
+//         implements InitializingBean
+{
     Map<String, Integer> map ;
 
     public CartService() {
@@ -43,9 +47,18 @@ public class CartService implements DisposableBean /* implements InitializingBea
     }
 
 
-    @Override
-    public void destroy() throws Exception {
+//    @Override
+//    public void destroy() throws Exception {
+//        map.clear();
+//        System.out.println("Bean is getting Destroyed");
+//    }
+    public void  stop(){
         map.clear();
         System.out.println("Bean is getting Destroyed");
+    }
+    @PreDestroy
+    public void stop2(){
+        map.clear();
+        System.out.println("Bean is being destroyed");
     }
 }
