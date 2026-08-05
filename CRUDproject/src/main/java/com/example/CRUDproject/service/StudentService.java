@@ -17,6 +17,7 @@ public class StudentService {
     }
 
     public Student createStudent(Student studentReq) {
+        studentReq.setDeleted(false);
         return studentRepository.save(studentReq);
     }
 
@@ -52,6 +53,15 @@ public class StudentService {
             return false ;
         }
         studentRepository.deleteById(id);
+        return true;
+    }
+
+    public Boolean softDeleteStudent(Long id) {
+        boolean isStudent = studentRepository.existsById(id);
+        if (! isStudent){
+            return false;
+        }
+//        studentRepository.
         return true;
     }
 }

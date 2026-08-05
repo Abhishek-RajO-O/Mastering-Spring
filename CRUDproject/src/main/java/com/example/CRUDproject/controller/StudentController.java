@@ -64,6 +64,14 @@ public class StudentController {
 
         return ResponseEntity.ok("Record Deleted");
     }
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<String> deleteStudentSoftly(@PathVariable Long id){
+        Boolean isDeleted = studentService.softDeleteStudent(id);
+        if (! isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body("Record Deleted Softly");
+    }
 
 
 }
