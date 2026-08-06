@@ -2,7 +2,6 @@ package com.example.CRUDproject.service;
 
 import com.example.CRUDproject.entity.Student;
 import com.example.CRUDproject.repository.StudentRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +27,10 @@ public class StudentService {
     }
 
     public List<Student> getAllStudents() {
-        return studentRepository.findAllByDeletedIsFalse();
+//        return studentRepository.findAllByDeletedIsFalse();
+        return studentRepository.findByDeletedIsFalse();
     }
+
 
     public Student updateStudent(Long id, Student studentReq) {
         Optional<Student>  existingStudent = studentRepository.findById(id);
@@ -57,11 +58,13 @@ public class StudentService {
     }
 
     public Boolean softDeleteStudent(Long id) {
-        boolean isStudent = studentRepository.existsById(id);
-        if (! isStudent){
+        Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
+        if (existingStudent.isEmpty()){
             return false;
         }
-//        studentRepository.
+        Student studentToSave = existingStudent.get();
+        studentToSave.setDeleted(true);
+        studentRepository.save(studentToSave);
         return true;
     }
 
