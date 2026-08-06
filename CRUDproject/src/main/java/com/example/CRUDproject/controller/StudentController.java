@@ -25,6 +25,15 @@ public class StudentController {
                 .status(HttpStatus.CREATED)
                 .body(createdStudent);
     }
+    @GetMapping("/admin")
+    public ResponseEntity<List<Student>> adminGetAllStudent(){
+        List<Student>  students = studentService.adminGetAllStudents();
+
+        if (students.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(students);
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id){

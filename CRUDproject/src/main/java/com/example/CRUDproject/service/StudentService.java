@@ -22,13 +22,13 @@ public class StudentService {
     }
 
     public Student getStudent(Long id) {
-        Optional<Student> studentResp = studentRepository.findById(id);
+        Optional<Student> studentResp = studentRepository.findByIdAndDeletedIsFalse(id);
 
         return studentResp.orElse(null);
     }
 
     public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+        return studentRepository.findAllByDeletedIsFalse();
     }
 
     public Student updateStudent(Long id, Student studentReq) {
@@ -63,5 +63,9 @@ public class StudentService {
         }
 //        studentRepository.
         return true;
+    }
+
+    public List<Student> adminGetAllStudents() {
+        return studentRepository.findAll();
     }
 }
